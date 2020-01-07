@@ -11,6 +11,21 @@ class App extends Component {
     citas: []
   }
 
+  // Cuando la aplicación carga
+  componentDidMount() {
+    const citasLS = localStorage.getItem('citas');
+    if (citasLS){
+      this.setState({
+        citas: JSON.parse(citasLS)
+      });
+    }
+  }
+
+  // Cuando eliminamos o agregamos una nueva cita
+  componentDidUpdate() {
+    localStorage.setItem('citas', JSON.stringify(this.state.citas));
+  }
+
   //Debido a que no podemos pasar info de hijo a padre, creamos una función para hacerlo
   crearNuevaCita = datos => {
     
